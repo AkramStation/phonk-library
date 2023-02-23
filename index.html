@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+      
+      
+    <title>GoldBot</title>
+    <style>
+
+    
+
+
+
+
+
+body {
+        background-color: #212121;
+      }
+      .menu {
+        background-color: #212121;
+        color: #ffffff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+      }
+      .menu a {
+        color: #ffffff;
+        text-decoration: none;
+        padding: 10px;
+      }
+      .menu a:hover {
+        color: #cccccc;
+      }
+      body {
+        background-color: #212121;
+      }
+      canvas {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+    </style>
+  </head>
+  <body>
+
+
+
+
+    <nav>
+        <ul>
+
+    
+    <div class="menu">
+        <div class="logo">GoldBot</div>
+        <div class="buttons">
+          <a href="#">Home</a>
+          <a href="#">Docs</a>
+          
+
+        </nav>
+    </ul>
+
+    <canvas id="canvas"></canvas>
+    <script>
+      // تحديد متغيرات الرسومات والإعدادات
+      var canvas = document.getElementById('canvas');
+      var context = canvas.getContext('2d');
+      var width = window.innerWidth;
+      var height = window.innerHeight;
+      var particles = [];
+
+      // تعيين حجم اللوحة
+      canvas.width = width;
+      canvas.height = height;
+
+      // إضافة الجزء المتحرك البيضاء
+      for (var i = 0; i < 50; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: Math.random() * 2 + 1,
+          vx: Math.floor(Math.random() * 5) - 2,
+          vy: Math.floor(Math.random() * 5) - 2
+        });
+      }
+
+      // تحديث الجزء المتحرك وإعادة رسمه
+      function update() {
+        context.clearRect(0, 0, width, height);
+        context.fillStyle = '#ffffff';
+        for (var i = 0; i < particles.length; i++) {
+          var p = particles[i];
+          context.beginPath();
+          context.arc(p.x, p.y, p.radius, 0, Math.PI * 2, false);
+          context.fill();
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < -50) {
+            p.x = width + 50;
+          }
+          if (p.y < -50) {
+            p.y = height + 50;
+          }
+          if (p.x > width + 50) {
+            p.x = -50;
+          }
+          if (p.y > height + 50) {
+            p.y = -50;
+          }
+        }
+        requestAnimationFrame(update);
+      }
+
+      // بدء التحديث
+      update();
+    </script>
+
+<div class="centered">
+    <p>What's Goldbot Lib ?</p>
+    
+  </div>
+  
+  
+
+  </body>
+</html>
